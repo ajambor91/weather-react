@@ -84,13 +84,22 @@ class App extends React.Component{
                 this.setState(prevState =>{
                     let city = resp.city;
                     let country = resp.country;
-                    return{
-                        location:{
-                            city:city,
-                            country:country
-                        },
-                        locationStr:city+', '+country
-                    }
+                    if(city != null && country !=null){
+                        return{
+                            location:{
+                                city:city,
+                                country:country
+                            },
+                            locationStr:city+', '+country,
+                            geoLocale:false
+
+                        }
+                    }    
+                    else{
+                        return{
+                            geoLocale:false
+                        }
+                    }    
                 });
             }); 
         
@@ -228,7 +237,7 @@ class App extends React.Component{
         }
       
         if(this.state.geoLocale === true){
-            // this.getCityFromCoords(); 
+            this.getCityFromCoords(); 
         }
      
 
@@ -246,8 +255,8 @@ class App extends React.Component{
                    <h1 className='h1'>Wheather</h1>
                     <p>In city: <CitySelection location={this.state.locationStr} style={this.state.styles.input} onChange={this.selectCity.bind(this)} /></p>
                     <div className='unit-switcher-container'>
-                        <SwitchButton active={(this.state.unit == 'f') ? true:false} switchUnit={this.switchUnit.bind(this)} unit='F' unitName='Fahrenheit' />
-                        <SwitchButton active={(this.state.unit == 'c') ? true:false} switchUnit={this.switchUnit.bind(this)} unit='C' unitName='Celsius' />
+                        <SwitchButton active={(this.state.unit == 'f') ? true:false} switchUnit={this.switchUnit.bind(this)} unit='f' unitName='Fahrenheit' />
+                        <SwitchButton active={(this.state.unit == 'c') ? true:false} switchUnit={this.switchUnit.bind(this)} unit='c' unitName='Celsius' />
                     </div>
                </div>
                 {this.state.loader ? 
@@ -256,7 +265,7 @@ class App extends React.Component{
                          <div className='col-12'>
                             <ul className='list-group'>
                                 <li><WheaterDescription description={this.state.description} /></li>
-                                <li><Temperature temperature={this.state.temperature}/></li>
+                                <li><Temperature temperature={this.state.temperature} unit={this.state.unit}/></li>
                             </ul>
                         </div>
                     </div>
