@@ -242,17 +242,17 @@ class App extends React.Component{
     render(){
         return(
            <div className='container-fluid'>
-               <div className='header pt-5 position-absolute'>
+               <div className='header pt-5 position-absolute px-2'>
                    <h1 className='h1'>Wheather</h1>
                     <p>In city: <CitySelection location={this.state.locationStr} style={this.state.styles.input} onChange={this.selectCity.bind(this)} /></p>
                     <div className='unit-switcher-container'>
-                        <SwitchButton switchUnit={this.switchUnit.bind(this)} unit='F' unitName='Fahrenheit' />
-                        <SwitchButton switchUnit={this.switchUnit.bind(this)} unit='C' unitName='Celsius' />
+                        <SwitchButton active={(this.state.unit == 'f') ? true:false} switchUnit={this.switchUnit.bind(this)} unit='F' unitName='Fahrenheit' />
+                        <SwitchButton active={(this.state.unit == 'c') ? true:false} switchUnit={this.switchUnit.bind(this)} unit='C' unitName='Celsius' />
                     </div>
                </div>
                 {this.state.loader ? 
                 (<Loader />) :
-                (<div className='row wheather-background px-5' style={this.state.styles.background}>
+                (<div className='row wheather-background pt-5 px-2' style={this.state.styles.background}>
                          <div className='col-12'>
                             <ul className='list-group'>
                                 <li><WheaterDescription description={this.state.description} /></li>
@@ -268,7 +268,7 @@ class App extends React.Component{
 class SwitchButton extends React.Component{
     render(){
         return(
-            <button className='unit-switcher' onClick={this.props.switchUnit} data-unit={this.props.unit}>{this.props.unitName}</button>
+            <button className='unit-switcher' style={{backgroundColor: this.props.active ? 'rgba(255,255,255,0.3' : ''}} onClick={this.props.switchUnit} data-unit={this.props.unit}>{this.props.unitName}</button>
         )
     }
 }
