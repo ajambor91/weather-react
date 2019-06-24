@@ -1,18 +1,4 @@
-class Header extends React.Component{
-    render(){
-        return (
-            <h1>Sprawdzenie pogody</h1>
-        )
-    }
-}
 
-class UnitShift extends React.Component{
-    render(){
-        return(
-            <button style={{color: this.props.active ? (this.props.color): ('grey')}} data-unit={this.props.unit} onClick={this.props.onClick} className="button">{this.props.name}</button>
-        )
-    }    
-}
 
 class App extends React.Component{
     constructor(){
