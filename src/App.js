@@ -71,7 +71,6 @@ class App extends React.Component{
     });
   }
   getData = () =>{
-    this.setState({loader:true});
     fetch(this.api+ '?city='+ this.state.location.city + '&country=' + this.state.location.country)
     .then(resp => resp.json())
     .then(resp=>{
