@@ -7,7 +7,7 @@ input{
     border-bottom-style: solid;
     font-size: 30px;
     color:white;
-    text-align: center
+    text-transform: uppercase;
 }
 input:focus{
     outline: none;
