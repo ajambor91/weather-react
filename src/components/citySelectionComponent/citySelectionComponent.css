@@ -1,0 +1,20 @@
+input{
+    font-style: italic;
+    background-color: transparent;
+    border:none;
+    box-shadow: none;
+    border-bottom-color: white;
+    border-bottom-style: solid;
+    font-size: 30px;
+    color:white;
+    text-align: center
+}
+input:focus{
+    outline: none;
+}
+.hidden-span{
+    font-style: italic;
+    visibility: hidden;
+    font-size: 30px;
+    padding: 0 5px 0 1px;
+}
