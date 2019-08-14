@@ -5,11 +5,13 @@ import CitySelectionComponent from './components/citySelectionComponent/citySele
 import SwitchButtonComponent from './components/switchButtonComponent/switchButtonComponent';
 import WeatherDescriptionComponent from './components/weatherDescriptionComponent/weatherDescriptionComponent';
 import TemperatureComponent from './components/temperatureComponent/temperatureComponent';
+import LoaderComponent from './components/loaderComponent/loaderComponent';
 class App extends React.Component{
   constructor(){
     super();
     this.api = 'http://adamjambor.pl/w-backend/index.php';
     this.state = {
+      loader:true,
       locationStr:'Warsaw, Poland',
       location:{
         city:'Warsaw',
@@ -69,6 +71,7 @@ class App extends React.Component{
     });
   }
   getData = () =>{
+    this.setState({loader:true});
     fetch(this.api+ '?city='+ this.state.location.city + '&country=' + this.state.location.country)
     .then(resp => resp.json())
     .then(resp=>{
@@ -77,7 +80,8 @@ class App extends React.Component{
             description:resp.description,
             temperature:resp.temperature,
             code:resp.code,
-            unit:'f'
+            unit:'f',
+            loader:false
           }, ()=>{
     
             if(this.state.sekelectedUnit != 'f' && this.state.selectedUnit != 'F'){
@@ -127,7 +131,8 @@ class App extends React.Component{
   }
   render(){
     return(
-      <div className='container' style={this.state.styles.container}>
+      (!this.state.loader) ?  
+      (<div className='container' style={this.state.styles.container}>
         <div className='col'>
           <div className='header'>
             <WeatherComponent/>
@@ -146,7 +151,9 @@ class App extends React.Component{
             <TemperatureComponent temperature={this.state.temperature} />
           </div>
         </div>
-      </div>
+      </div>)
+      :
+      (<LoaderComponent />)
       )
   }
 
