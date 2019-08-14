@@ -15,11 +15,9 @@ class App extends React.Component{
         city:'Warsaw',
         country:'Poland'
       },
-      weather:{
-        temperature:'',
-        code:'',
-        description:''
-      },
+      temperature:'',
+      description:'',
+      code:'',
       styles:{
         container:{
           backgroundImage:''
@@ -39,7 +37,7 @@ class App extends React.Component{
       unit = e.toLowerCase();
     }
     this.setState(prevState=>{
-      let temperature = this.state.weather.temperature;
+      let temperature = this.state.temperature;
       if(prevState.unit != unit){
         if(unit == 'c'){
           temperature=((temperature-32)/1.8).toFixed(0);
@@ -47,9 +45,7 @@ class App extends React.Component{
           temperature =  ((temperature * 1.8)+32).toFixed(0);
         }
         return{
-          weather:{
-            temperature:temperature
-          },
+          temperature:temperature,
           unit:unit,
           selectedUnit:unit
         }
@@ -78,11 +74,9 @@ class App extends React.Component{
     .then(resp=>{
       if(resp.status === true){
           this.setState({
-            weather:{
-              description:resp.description,
-              temperature:resp.temperature,
-              code:resp.code
-            },
+            description:resp.description,
+            temperature:resp.temperature,
+            code:resp.code,
             unit:'f'
           }, ()=>{
     
@@ -91,14 +85,12 @@ class App extends React.Component{
             }
             this.changeBackground();
 
-          },()=>{
-            console.log(this.state.weather.description);
           });
       }
     })
   }
   changeBackground = () =>{
-          let code = this.state.weather.code;
+      let code = this.state.code;
       let icon;
       if(code <=5 || code == 11 || code == 12 || code >= 37 && code <= 40 || code == 45 || code ==47){
 
@@ -113,8 +105,7 @@ class App extends React.Component{
       else if(code >=31 && code <=36){
         icon = 'sun';
       }
-      console.log(code);
-      console.log(icon);
+
     this.setState(prevState=>{
 
       return{
@@ -151,8 +142,8 @@ class App extends React.Component{
         </div>
         <div className='col'>
           <div className="description">
-            <WeatherDescriptionComponent description={this.state.weather.description} />
-            <TemperatureComponent temperature={this.state.weather.temperature} />
+            <WeatherDescriptionComponent description={this.state.description} />
+            <TemperatureComponent temperature={this.state.temperature} />
           </div>
         </div>
       </div>

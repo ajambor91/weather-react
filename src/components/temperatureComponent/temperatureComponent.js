@@ -3,8 +3,8 @@ import './temperatureComponent.css';
 class TemperatureComponent extends React.Component{
     render(){
         return(
-            <div>
-                <span className="temperature">{this.props.temperature}&deg;</span>
+            <div className="temperature">
+                <span>{this.props.temperature}&deg;</span>
             </div>
         )
     }
